@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="true">
+
+	<appender name="FILE" class="org.apache.log4j.rolling.RollingFileAppender">
+		<param name="Append" value="true" />
+		
+		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+			<param name="FileNamePattern"
+				value="/home/raghunandangupta/Desktop/CSV/ALLCSV/server.%d-%i.gz" />
+			<param name="ActiveFileName"
+				value="/home/raghunandangupta/Desktop/CSV/ALLCSV/server.log" />
+		</rollingPolicy>
+
+		<triggeringPolicy class="org.apache.log4j.rolling.SizeBasedTriggeringPolicy">
+			<param name="MaxFileSize" value="10700000" />
+		</triggeringPolicy>
+
+		<layout class="org.apache.log4j.EnhancedPatternLayout">
+			<param name="ConversionPattern"
+				value="%d{dd-MMM-yyyy HH:mm:ss,SSS}#%X{requestId} %R [%t] %-5p [%c{1}] - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- <appender name="ASYNC" class="com.testlog4j"> <param name="BufferSize" 
+		value="500" /> <appender-ref ref="FILE" /> </appender> -->
+
+	<logger name="com.testlog4j" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="FILE" />
+	</logger>
+
+</log4j:configuration>
+
