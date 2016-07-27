@@ -4,7 +4,7 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
 	debug="false">
 
-	<appender name="FILE" class="org.apache.log4j.rolling.RollingFileAppender">
+	<appender name="FILE_METRIC" class="org.apache.log4j.rolling.RollingFileAppender">
 	
 		<param name="Append" value="true" />
 
@@ -16,7 +16,28 @@
 		</rollingPolicy>
 
 		<triggeringPolicy class="org.apache.log4j.rolling.SizeBasedTriggeringPolicy">
-			<param name="MaxFileSize" value="30700000" />
+			<param name="MaxFileSize" value="1073741824" />
+		</triggeringPolicy>
+
+		<layout class="org.apache.log4j.EnhancedPatternLayout">
+			<param name="ConversionPattern"
+				value="[%p] %d  %x %c %M - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="FILE_ERROR" class="org.apache.log4j.rolling.RollingFileAppender">
+	
+		<param name="Append" value="true" />
+
+		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+			<param name="FileNamePattern"
+				value="/home/raghunandangupta/Desktop/CSV/ALLCSV/exceptions.%d-%i.gz" />
+			<param name="ActiveFileName"
+				value="/home/raghunandangupta/Desktop/CSV/ALLCSV/exceptions.log" />
+		</rollingPolicy>
+
+		<triggeringPolicy class="org.apache.log4j.rolling.SizeBasedTriggeringPolicy">
+			<param name="MaxFileSize" value="1073741824" />
 		</triggeringPolicy>
 
 		<layout class="org.apache.log4j.EnhancedPatternLayout">
@@ -25,13 +46,15 @@
 		</layout>
 	</appender>
 
-	<!-- <appender name="ASYNC" class="com.testlog4j"> <param name="BufferSize" 
-		value="500" /> <appender-ref ref="FILE" /> </appender> -->
-
-	<logger name="com.testlog4j" additivity="false">
+	<logger name="debug_log" additivity="false">
 		<level value="INFO" />
-		<appender-ref ref="FILE" />
+		<appender-ref ref="FILE_METRIC" />
 	</logger>
-
+	
+	<logger name="error_log" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="FILE_ERROR" />
+	</logger>
+	
 </log4j:configuration>
 
