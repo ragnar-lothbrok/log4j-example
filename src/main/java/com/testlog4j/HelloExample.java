@@ -15,7 +15,7 @@ public class HelloExample{
 	
 	private void runMe(String parameter){
 		
-		for(int i=0;i<1000000;i++){
+		for(int i=0;i<100;i++){
 			error_logger.error("This is error : " + parameter);
 			error_metric.info("This is info : " + parameter);
 		}
